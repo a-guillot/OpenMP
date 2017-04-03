@@ -96,9 +96,26 @@ A section will only be executed once. The syntax is the following:
 #pragma omp parallel sections [clause [clause]...]
 {
 #pragma omp section
-// Bloc 1
+// Block 1
 . . .
 #pragma omp section
-// Bloc N
+// Block N
 }
 ```
+
+## Variable status
+
+### `private`
+
+Every variable specified in this list will be unique to each thread.
+**Warning:** the initial and final values are not defined.
+
+### `firstprivate`
+
+`private` plus an automatic initialization to the value of tha variable before the parallel region.
+
+### `lastprivate`
+
+`private` plus the copy of the private variable at the end of the parallel region into the original variable.
+
+
