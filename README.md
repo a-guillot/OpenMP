@@ -34,8 +34,7 @@ int main()
 
 Indicates that the following for loop shall be parallelized and executed by the thread team.
 
-### Example
-
+### Example with evenly distributed workload
 Here `addval_reference` and `addval_kernel` do the same thing without the `-fopenmp` option.
 However, the OpenMP call splits the work evenly between the thread team.
 
