@@ -34,7 +34,7 @@ int main()
 
 Indicates that the following for loop shall be parallelized and executed by the thread team.
 
-### Example with evenly distributed workload
+### Example
 
 Here `addval_reference` and `addval_kernel` do the same thing without the `-fopenmp` option.
 However, the OpenMP call splits the work evenly between the thread team.
@@ -56,4 +56,9 @@ OpenMP provides us with the `reduction` clause, which is very useful when you ne
 
 The following snippet shows how it is possible to perform a reduction:
 
-
+```C
+#pragma omp parallel for reduction(+:sum)
+  for (size_t i = 0; i < N; i++) {
+    sum += a[i];
+  }
+```
