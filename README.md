@@ -34,7 +34,7 @@ int main()
 
 Indicates that the following for loop shall be parallelized and executed by the thread team.
 
-### Example with evenly distributed workload
+### Example with evenly distributed workload (`addval.c`)
 Here `addval_reference` and `addval_kernel` do the same thing without the `-fopenmp` option.
 However, the OpenMP call splits the work evenly between the thread team.
 
@@ -49,7 +49,7 @@ void addval_kernel(double a[N], double b[N], double val) {
 
 An interesting point here is that the iterator is private by default: each thread will have a different i, and there won't be any concurrency problem.
 
-### `reduction` Example
+### `reduction` Example (`reduction.c`)
 
 OpenMP provides us with the `reduction` clause, which is very useful when you need to apply the same operation to a structure (e.g. compute the sum of an array).
 
@@ -61,3 +61,22 @@ The following snippet shows how it is possible to perform a reduction:
     sum += a[i];
   }
 ```
+
+## `schedule` Construct
+
+Specifies the loadsharing policy. The different policies will create a varying degree of work for the runtime, which means potentially decrasing the performance.
+
+1. `static` will divide work among the thread team using a round-robin strategy. if `CHUNK` is not specified then each thread will get a block of a similar size.
+2. `dynamic` will give work to threads that don't have anything to do. `CHUNK`'s default value is 1, and represents the number of iterations that the runtime will assign to a free thread.
+
+### `dynamic` example (`schedule.c`)
+
+```C
+#pragma omp for schedule(dynamic, CHUNK)
+    for (size_t i = 0; i < SIZE; i++) {
+      c[i] = a[i] + b[i];
+      printf("Thread %d: c[%2zu] = %g\n", tid, i, c[i]);
+    }
+```
+In this case each waiting thread will be assigned CHUNK iterations.
+
