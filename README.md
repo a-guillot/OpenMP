@@ -34,7 +34,7 @@ int main()
 
 Indicates that the following for loop shall be parallelized and executed by the thread team.
 
-### Exemple where each task is independant (`addval.c`)
+### Example with evenly distributed workload
 
 Here `addval_reference` and `addval_kernel` do the same thing without the `-fopenmp` option.
 However, the OpenMP call splits the work evenly between the thread team.
@@ -49,3 +49,11 @@ void addval_kernel(double a[N], double b[N], double val) {
 ```
 
 An interesting point here is that the iterator is private by default: each thread will have a different i, and there won't be any concurrency problem.
+
+### `reduction` Example
+
+OpenMP provides us with the `reduction` clause, which is very useful when you need to apply the same operation to a structure (e.g. compute the sum of an array).
+
+The following snippet shows how it is possible to perform a reduction:
+
+
