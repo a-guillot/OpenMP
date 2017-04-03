@@ -70,7 +70,6 @@ Specifies the loadsharing policy. The different policies will create a varying d
 2. `dynamic` will give work to threads that don't have anything to do. `CHUNK`'s default value is 1, and represents the number of iterations that the runtime will assign to a free thread.
 
 ### `dynamic` example (`schedule.c`)
-
 ```C
 #pragma omp for schedule(dynamic, CHUNK)
     for (size_t i = 0; i < SIZE; i++) {
