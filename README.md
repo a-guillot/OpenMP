@@ -12,11 +12,11 @@ There is an implicit barrier at the end of the construct, i.e. every thread will
 ### Clauses
 
 1. `if (*scalar-expression*)`: creates the thread team only if the conditions is met.
-2. `num_threads(*integer-expression*)`: creats a thread team the size of the expression.
+2. `num_threads(*integer-expression*)`: creates a thread team the size of the expression.
 
 All these clauses are optional. However, they can also be combined.
 
-### Example (parallel.c)
+### Example (`parallel.c`)
 
 ```C
 #include <stdio.h>
@@ -29,3 +29,23 @@ int main()
 	return 0;
 }
 ```
+
+## `for` Construct
+
+Indicates that the following for loop shall be parallelized and executed by the thread team.
+
+### Exemple where each task is independant (`addval.c`)
+
+Here `addval_reference` and `addval_kernel` do the same thing without the `-fopenmp` option.
+However, the OpenMP call splits the work evenly between the thread team.
+
+```C
+void addval_kernel(double a[N], double b[N], double val) {
+  #pragma omp parallel for
+  for (size_t i = 0; i < N; i++) {
+    a[i] = b[i] + val;
+  }
+}
+```
+
+An interesting point here is that the iterator is private by default: each thread will have a different i, and there won't be any concurrency problem.
