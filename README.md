@@ -14,8 +14,9 @@ There is an implicit barrier at the end of the construct, i.e. every thread will
 1. `if (*scalar-expression*)`: creates the thread team only if the conditions is met.
 2. `num_threads(*integer-expression*)`: creats a thread team the size of the expression.
 
+All these clauses are optional. However, they can also be combined.
 
-#### Example (`parallel.c`)
+### Example (`parallel.c`)
 
 ```C
 #include <stdio.h>
