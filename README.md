@@ -16,7 +16,7 @@ There is an implicit barrier at the end of the construct, i.e. every thread will
 
 All these clauses are optional. However, they can also be combined.
 
-### Example
+### Example (parallel.c)
 
 ```C
 #include <stdio.h>
