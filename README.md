@@ -69,8 +69,7 @@ Specifies the loadsharing policy. The different policies will create a varying d
 1. `static` will divide work among the thread team using a round-robin strategy. if `CHUNK` is not specified then each thread will get a block of a similar size.
 2. `dynamic` will give work to threads that don't have anything to do. `CHUNK`'s default value is 1, and represents the number of iterations that the runtime will assign to a free thread.
 
-
-### `dynamic` example (`schedule.c`)
+### Example using the `schedule` clause (`schedule.c`)
 
 ```C
 #pragma omp for schedule(dynamic, CHUNK)
