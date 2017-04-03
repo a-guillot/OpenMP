@@ -80,3 +80,25 @@ Specifies the loadsharing policy. The different policies will create a varying d
 ```
 In this case each waiting thread will be assigned CHUNK iterations.
 
+## `nowait`
+
+`nowait` removes the implicit barrier at the end of a parallel section.
+
+## `single`
+
+A single block will only be executed once by any thread.
+
+## `sections`
+
+A section will only be executed once. The syntax is the following:
+
+```C
+#pragma omp parallel sections [clause [clause]...]
+{
+#pragma omp section
+// Bloc 1
+. . .
+#pragma omp section
+// Bloc N
+}
+```
